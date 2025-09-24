@@ -14,7 +14,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return Inertia::render('home');
+        return Inertia::render('home', [
+            'todos' => Todo::all()
+        ]);
     }
 
     /**
@@ -62,6 +64,8 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+
+        return redirect()->route('home');
     }
 }
